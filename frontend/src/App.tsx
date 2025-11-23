@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+
 import "./App.css";
-import Chat from "./components/chat/Chat";
-import History from "./components/history/History";
 import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 
@@ -10,6 +10,14 @@ type User = "A" | "B" | null;
 
 function App() {
   const [activeUser, setActiveUser] = useState<User>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!activeUser && location.pathname !== "/") {
+      navigate("/", { replace: true });
+    }
+  }, [activeUser, location, navigate]);
 
   const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as User;

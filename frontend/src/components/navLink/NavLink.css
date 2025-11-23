@@ -1,9 +1,0 @@
-.nav-link {
-  text-decoration: none;
-}
-
-.nav-link.active .nav-button {
-  background: white;
-  color: #0052cc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
