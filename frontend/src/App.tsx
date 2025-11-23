@@ -3,6 +3,8 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import "./App.css";
 import Chat from "./components/chat/Chat";
 import History from "./components/history/History";
+import Home from "./components/home/Home";
+import Footer from "./components/footer/Footer";
 
 type User = "A" | "B" | null;
 
@@ -51,46 +53,8 @@ function App() {
           </nav>
         )}
       </header>
-
-      <main className="app-main">
-        {!activeUser ? (
-          <div className="welcome-screen">
-            <div className="welcome-card">
-              <div className="welcome-icon">👋</div>
-              <h2>Bem-vindo ao Sistema de Chat</h2>
-              <p>Para começar, selecione um usuário no menu acima</p>
-              <div className="features">
-                <div className="feature-item">
-                  <span className="feature-icon">💬</span>
-                  <span>Envie mensagens instantâneas</span>
-                </div>
-                <div className="feature-item">
-                  <span className="feature-icon">🤖</span>
-                  <span>Receba respostas automáticas</span>
-                </div>
-                <div className="feature-item">
-                  <span className="feature-icon">📋</span>
-                  <span>Acesse seu histórico completo</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Navigate to="/chat" replace />} />
-            <Route path="/chat" element={<Chat activeUser={activeUser} />} />
-            <Route
-              path="/historico"
-              element={<History activeUser={activeUser} />}
-            />
-            <Route path="*" element={<Navigate to="/chat" replace />} />
-          </Routes>
-        )}
-      </main>
-
-      <footer className="app-footer">
-        <p>Desenvolvido para 4Blue • {new Date().getFullYear()}</p>
-      </footer>
+      <Home activeUser={activeUser} />
+      <Footer />
     </div>
   );
 }
