@@ -83,11 +83,11 @@ function History({ activeUser }: HistoryProps) {
               key={msg.id}
               className={`history-item ${
                 msg.is_response ? "response" : "user-message"
-              }`}
+              } `}
             >
               <div className="history-item-header">
                 <strong>
-                  {msg.is_response ? "Sistema" : `Usuário ${msg.user}`}
+                  {msg.is_response ? "Sistema" : `Usuário ${msg.user} `}
                 </strong>
                 <span className="history-time">
                   {new Date(msg.created_at).toLocaleString("pt-BR")}

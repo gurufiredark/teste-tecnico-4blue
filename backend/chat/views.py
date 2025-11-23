@@ -25,7 +25,7 @@ def send_message(request):
             is_response=False
         )
         
-        # Resposta baseada no usuário escolhido
+        # Resposta dependendo do usuário
         if user == 'A':
             response_text = "Obrigado por seu contato, Usuário A. Em breve responderemos."
         else:

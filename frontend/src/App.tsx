@@ -29,7 +29,7 @@ function App() {
       <header className="app-header">
         <div className="header-content">
           <h1>Sistema de Chat - 4Blue</h1>
-          <p className="subtitle">Teste Técnico - Chatbot de Atendimento</p>
+          <p className="subtitle">Chatbot de Atendimento Simulado</p>
         </div>
 
         <div className="user-selector-container">
