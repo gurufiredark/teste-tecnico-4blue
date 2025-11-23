@@ -74,7 +74,8 @@ API: Endpoints REST simples (/api/chat/send e /api/chat/history/<user>) utilizan
 
 CORS: Configurado via django-cors-headers para permitir que o Frontend (porta 5173) se comunique com o Backend (porta 8000).
 
-Frontend (React + TypeScript)
+## Frontend (React + TypeScript)
+
 Gerenciamento de Estado: O estado do "Usuário Ativo" (activeUser) é gerenciado no componente pai (App.tsx) utilizando o hook useState. Esse estado é passado via props para as rotas filhas.
 
 Roteamento: Utilizado react-router-dom para navegação. A rota / redireciona para /chat, e o acesso às telas é condicionado à seleção prévia de um usuário, garantindo uma experiência fluida.
