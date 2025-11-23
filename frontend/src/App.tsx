@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import "./App.css";
 import Chat from "./components/chat/Chat";
 import History from "./components/history/History";
@@ -7,12 +8,10 @@ type User = "A" | "B" | null;
 
 function App() {
   const [activeUser, setActiveUser] = useState<User>(null);
-  const [currentView, setCurrentView] = useState<"chat" | "history">("chat");
 
   const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as User;
     setActiveUser(value);
-    setCurrentView("chat"); // Volta para chat ao trocar de usuário
   };
 
   return (
@@ -43,20 +42,12 @@ function App() {
 
         {activeUser && (
           <nav className="navigation">
-            <button
-              className={`nav-button ${currentView === "chat" ? "active" : ""}`}
-              onClick={() => setCurrentView("chat")}
-            >
-              💬 Chat
-            </button>
-            <button
-              className={`nav-button ${
-                currentView === "history" ? "active" : ""
-              }`}
-              onClick={() => setCurrentView("history")}
-            >
-              📋 Histórico
-            </button>
+            <Link to="/chat" className="nav-link">
+              <button className="nav-button">💬 Chat</button>
+            </Link>
+            <Link to="/historico" className="nav-link">
+              <button className="nav-button">📋 Histórico</button>
+            </Link>
           </nav>
         )}
       </header>
@@ -85,21 +76,20 @@ function App() {
             </div>
           </div>
         ) : (
-          <>
-            {currentView === "chat" ? (
-              <Chat activeUser={activeUser} />
-            ) : (
-              <History activeUser={activeUser} />
-            )}
-          </>
+          <Routes>
+            <Route path="/" element={<Navigate to="/chat" replace />} />
+            <Route path="/chat" element={<Chat activeUser={activeUser} />} />
+            <Route
+              path="/historico"
+              element={<History activeUser={activeUser} />}
+            />
+            <Route path="*" element={<Navigate to="/chat" replace />} />
+          </Routes>
         )}
       </main>
 
       <footer className="app-footer">
-        <p>
-          Desenvolvido para 4Blue • {new Date().getFullYear()} • by Gabriel
-          Rodrigues
-        </p>
+        <p>Desenvolvido para 4Blue • {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
