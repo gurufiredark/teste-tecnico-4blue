@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Chat.css";
 
 interface Message {
@@ -18,6 +18,12 @@ function Chat({ activeUser }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMessages([]);
+    setMessage("");
+    setError(null);
+  }, [activeUser]);
 
   const sendMessage = async () => {
     if (!message.trim()) {
