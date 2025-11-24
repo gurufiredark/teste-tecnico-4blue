@@ -34,6 +34,7 @@ env/
 ENV/
 backend/venv/
 backend/env/
+.venv/
 
 # Django
 *.log

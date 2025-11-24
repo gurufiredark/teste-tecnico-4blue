@@ -8,6 +8,7 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 
 - [Node.js](https://nodejs.org/) (v18 ou superior)
 - [Python](https://www.python.org/) (v3.10 ou superior)
+- [UV](https://github.com/astral-sh/uv)
 - [Git](https://git-scm.com/)
 
 ---
@@ -15,6 +16,19 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 ## 🚀 Instalação e Execução
 
 É necessário abrir **dois terminais**: um para rodar o Backend e outro para o Frontend.
+
+### Instalando o UV
+
+Caso ainda não tenha o UV instalado, execute o comando abaixo no seu terminal de acordo com seu sistema operacional:
+
+```bash
+# macOS e Linux:
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+```
 
 ### 1. Backend (Django)
 
@@ -24,24 +38,15 @@ No terminal do backend, acesse a pasta do backend e configure o ambiente Python:
 # 1. Entre na pasta do backend
 cd backend
 
-# 2. Crie o ambiente virtual (Apenas na primeira vez)
-python -m venv venv
+# 2. Instale as dependências do projeto
+uv sync
 
-# 3. Ative o ambiente virtual (toda vez para executar o backend)
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
+# 3. Aplique as migrações do banco de dados (caso o arquivo "db.sqlite3" não exista ele será criado)
+# Para limpar o histórico, exclua o arquivo 'db.sqlite3' e execute este comando novamente
+uv run python manage.py migrate
 
-# 4. Instale as dependências
-pip install -r requirements.txt
-
-# 5. Aplique as migrações do banco de dados (Cria o arquivo db.sqlite3)
-# Para limpar o histórico exclua o arquivo 'db.sqlite3' e execute o comando abaixo novamente
-python manage.py migrate
-
-# 6. Inicie o servidor
-python manage.py runserver
+# 4. Inicie o servidor
+uv run python manage.py runserver
 ```
 
 ### 2. Frontend (React + Vite)
